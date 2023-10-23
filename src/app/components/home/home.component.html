@@ -9,56 +9,94 @@
 <div class="card">
   <h1>Welcome to v1_Ticket_Sys</h1>
 </div>
-
 <div class="card">
-  <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
-    <div class="card flex flex-column gap-6">
-      <span class="p-float-label p-input-icon-left flex">
-        <i class="pi pi-user"></i>
-        <input
-          pInputText
-          class="w-full"
-          id="username"
-          formControlName="username"
-        />
-        <label htmlFor="username">Username</label>
-      </span>
-      <span class="p-float-label p-input-icon-left flex">
-        <i class="pi pi-check"></i>
-        <input
-          pInputText
-          class="w-full"
-          id="password"
-          formControlName="password"
-        />
-        <label htmlFor="password">Password</label>
-      </span>
-      <div class="card flex justify-content-center">
-        <span class="p-buttonset">
-          <button
-            pButton
-            type="submit"
-            [disabled]="!loginForm.valid"
-            pRipple
-            label="Save"
-            icon="pi pi-check"
-          ></button>
-          <button
-            pButton
-            type="reset"
-            pRipple
-            label="Delete"
-            icon="pi pi-trash"
-          ></button>
-          <button
-            pButton
-            type="reset"
-            pRipple
-            label="Cancel"
-            icon="pi pi-times"
-          ></button>
-        </span>
-      </div>
-    </div>
-  </form>
+  <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
 </div>
+<!-- Grid Layout -->
+<div class="grid">
+  <div class="col-12 md:col-6 lg:col-6">
+    <div class="card">
+      <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <div class="card flex flex-column gap-6">
+          <span class="p-float-label p-input-icon-left flex">
+            <i class="pi pi-user"></i>
+            <input
+              pInputText
+              class="w-full"
+              id="username"
+              formControlName="username"
+            />
+            <label htmlFor="username">Username</label>
+          </span>
+          <span class="p-float-label p-input-icon-left flex">
+            <i class="pi pi-check"></i>
+            <input
+              pInputText
+              class="w-full"
+              id="name"
+              formControlName="name"
+            />
+            <label htmlFor="name">Suggest Name</label>
+          </span>
+          <small *ngIf="loginForm.controls['name'].touched &&  !loginForm.controls['name'].valid" id="name-help" class="text-center">Enter a valid name.</small>
+          <span class="p-float-label p-input-icon-left flex">
+            <i class="pi pi-check"></i>
+            <input
+              pInputText
+              class="w-full"
+              id="password"
+              formControlName="password"
+            />
+            <label htmlFor="password">Password</label>
+          </span>
+          <div class="card flex justify-content-center">
+            <span class="p-buttonset">
+              <!-- <button
+              pButton
+              type="submit"
+              [disabled]="!loginForm.valid"
+              pRipple
+              label="Save"
+              icon="pi pi-check"
+            ></button> -->
+              <button
+                pButton
+                type="submit"
+                pRipple
+                label="Save"
+                icon="pi pi-check"
+              ></button>
+              <button
+                pButton
+                type="reset"
+                pRipple
+                label="Delete"
+                icon="pi pi-trash"
+              ></button>
+              <button
+                pButton
+                type="reset"
+                pRipple
+                label="Cancel"
+                icon="pi pi-times"
+              ></button>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <!-- Form Value -->
+  <div class="col-12 md:col-6 lg:col-6">
+    <p-toast position="top-center"></p-toast>
+    <div class="card flex justify-content-center">
+      <pre>{{loginForm.value | json}}</pre>
+    </div>
+    <div class="card flex justify-content-center">
+      <pre>{{loginForm.valid| json}}</pre>
+    </div>
+  </div>
+</div>
+<!-- Grid Layout -->
+
