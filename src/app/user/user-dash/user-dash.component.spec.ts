@@ -1,0 +1,21 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { UserDashComponent } from './user-dash.component';
+
+describe('UserDashComponent', () => {
+  let component: UserDashComponent;
+  let fixture: ComponentFixture<UserDashComponent>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [UserDashComponent]
+    });
+    fixture = TestBed.createComponent(UserDashComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
