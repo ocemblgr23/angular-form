@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Message, MessageService } from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 
@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   value = '';
 
   loginForm: FormGroup;
+  dynamicForm:FormGroup;
   messages!: Message[];
 
   constructor(private fb: FormBuilder,
@@ -23,6 +24,9 @@ export class HomeComponent implements OnInit {
       name: ['', [Validators.required],this.nameNotAllow],
       password: ['', Validators.required],
     });
+    this.dynamicForm = this.fb.group({
+      dynamicFields: this.fb.array([])
+    })
   }
 
   ngOnInit(): void {}
@@ -39,6 +43,22 @@ export class HomeComponent implements OnInit {
 
   resetUserLogin() {
     this.loginForm.reset();
+  }
+
+  get Fields() {
+    return this.dynamicForm.get("dynamicFields") as FormArray;
+  }
+
+  addTextInput() {
+    const inputControl = this.fb.group({
+      fieldName: [''],
+    });
+    (this.dynamicForm.get("dynamicFields") as FormArray).push(inputControl)
+  }
+
+  checkDynamicData() {
+    console.log(this.dynamicForm.value);
+
   }
 
   nameNotAllow(control:AbstractControl) {
